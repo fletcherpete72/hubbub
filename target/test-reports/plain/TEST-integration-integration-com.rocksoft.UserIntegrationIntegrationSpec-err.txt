@@ -1,2 +1,3 @@
 --Output from Saving our first user to the database--
 --Output from Updating a saved user changes its properties--
+--Output from Deleting a user removes it from the db--
