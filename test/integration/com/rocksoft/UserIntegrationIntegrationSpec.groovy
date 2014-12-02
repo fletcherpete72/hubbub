@@ -20,7 +20,7 @@ class UserIntegrationIntegrationSpec extends IntegrationSpec {
 	}
 	
 	def "Updating a saved user changes its properties"() {
-		given: "A brand new user"
+		given: "An existing user"
 		def joe = new User(loginId: "joe", password: "secret", homepage: "http://www.grailsinaction.com")
 		joe.save(failOnError:true)
 				
@@ -31,6 +31,20 @@ class UserIntegrationIntegrationSpec extends IntegrationSpec {
 		
 		then: "the change is reflected in the database"
 		User.get(joe.id).password == "new[password"
+	}
+	
+	def "Deleting a user removes it from the db" () {
+		given: "An existing user"
+		def joe = new User(loginId: "joe", password: "secret", homepage: "http://www.grailsinaction.com")
+		joe.save(failOnError:true)
+				
+		when: "the user is deleted"
+		def foundUser = User.get(joe.id)
+		foundUser.delete()
+		
+		then: "the user is no longer found in the database"
+			User.get(joe.id) == null
+			!User.exists(joe.id)
 	}
 	
     def setup() {
