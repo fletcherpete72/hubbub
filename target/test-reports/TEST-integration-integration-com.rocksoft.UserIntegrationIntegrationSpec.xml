@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="DENHARKNER1A" name="com.rocksoft.UserIntegrationIntegrationSpec" tests="2" time="0.499" timestamp="2014-12-02T22:30:03">
+  <properties />
+  <testcase classname="com.rocksoft.UserIntegrationIntegrationSpec" name="Saving our first user to the database" time="0.468" />
+  <testcase classname="com.rocksoft.UserIntegrationIntegrationSpec" name="Updating a saved user changes its properties" time="0.015" />
+  <system-out><![CDATA[--Output from Saving our first user to the database--
+--Output from Updating a saved user changes its properties--
+]]></system-out>
+  <system-err><![CDATA[--Output from Saving our first user to the database--
+--Output from Updating a saved user changes its properties--
+]]></system-err>
+</testsuite>
