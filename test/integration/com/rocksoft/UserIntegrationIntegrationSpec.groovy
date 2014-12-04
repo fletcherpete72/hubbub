@@ -1,5 +1,6 @@
 package com.rocksoft
 
+import org.apache.catalina.startup.HomesUserDatabase;
 import org.junit.internal.runners.statements.FailOnTimeout;
 
 import grails.test.spock.IntegrationSpec
@@ -47,6 +48,35 @@ class UserIntegrationIntegrationSpec extends IntegrationSpec {
 			!User.exists(joe.id)
 	}
 	
+	def "Saving a user with validation problems causes an error" () {
+		given: "A user that fails some validations"
+		User user = new User(loginId: "b", password: "c", homepage: "asdasd")  
+		
+		when: "The validate method is invoked"
+		user.validate()
+		
+		then: "Errors exist"
+		user.hasErrors()
+		
+	}
+
+	def "Saving a user with a login id that matches password causes an error" () {
+		def rejectedValue = "abcdefg"
+		
+		given: "A user that fails some validations"
+		User user = new User(loginId: rejectedValue, password: rejectedValue)
+		
+		when: "The validate method is invoked"
+		user.validate()
+		
+		then: "Errors exist"
+		user.hasErrors()
+		
+		user.errors.getFieldError("password").code == "validator.invalid"
+		user.errors.getFieldError("password").rejectedValue == rejectedValue
+		user.loginId == rejectedValue
+	}
+
     def setup() {
     }
 
